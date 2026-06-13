@@ -4,7 +4,7 @@ export async function initializeDatabase(){
     await db.execAsync(`
         CREATE TABLE IF NOT EXISTS snippets(
             id integer PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
+            title TEXT,
             code TEXT,
             description TEXT,
             tags TEXT DEFAULT '[]',

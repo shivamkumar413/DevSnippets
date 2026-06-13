@@ -3,7 +3,7 @@ import { getAttachementsBySnippetId } from "./attachment.respository";
 
 export type Snippet = {
   id: number;
-  title: string;
+  title: string | null;
   code: string | null;
   description: string | null;
   tags: string[];
@@ -12,25 +12,24 @@ export type Snippet = {
   updated_at: number;
 };
 
+
+
 export type UpdateSnippet = Partial<Omit<Snippet, "id" | "created_at" | "updated_at">> & {
   id: number;
 };
 
-export async function createSnippet(snippet : Snippet){
-    await db.runAsync(`
+export async function createSnippet(){
+    const snippet = await db.runAsync(`
         INSERT INTO snippets
-        (title,code,description,tags,favorite,created_at,updated_at)
-        VALUES(?,?,?,?,?,?,?)`,
+        (created_at,updated_at)
+        VALUES(?,?)`,
         [
-            snippet.title,
-            snippet.code,
-            snippet.description,
-            JSON.stringify(snippet.tags),
-            snippet.favorite,
             Date.now(),
             Date.now()
         ]
     );
+
+    return snippet.lastInsertRowId;
 }
 
 export async function updateSnippet(snippet : UpdateSnippet){

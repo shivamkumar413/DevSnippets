@@ -23,14 +23,17 @@ export default function SnippetPage() {
         id={SnippetId}
       />
       <CodeSnippet />
-      <CodeDescription />
+      <CodeDescription 
+        id={SnippetId}
+      />
     </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
     container : {
-        flex : 1
+        flex : 1,
+        backgroundColor : '#191919'
     },
     titleInput : {
         flex : 1,

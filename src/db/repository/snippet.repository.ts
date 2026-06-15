@@ -12,6 +12,17 @@ export type Snippet = {
   updated_at: number;
 };
 
+export type SnippetWithAttachment = {
+    id: number;
+    title: string | null;
+    code: string | null;
+    description: string | null;
+    tags: string[];
+    favorite : number;
+    created_at: number;
+    updated_at: number;
+    attachments : Promise<string[]>
+}
 
 
 export type UpdateSnippet = Partial<Omit<Snippet, "id" | "created_at" | "updated_at">> & {
@@ -103,7 +114,7 @@ export async function getAllSnippets() : Promise<Snippet[]>{
     }));
 }
 
-export async function getSnippetById(id : number) : Promise<unknown>{
+export async function getSnippetById(id : number) : Promise<SnippetWithAttachment>{
     const snippet : Snippet | null= await db.getFirstAsync(`
         SELECT * FROM snippets
         WHERE id = ?`,

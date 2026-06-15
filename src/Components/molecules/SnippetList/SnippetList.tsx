@@ -1,16 +1,31 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Snippet } from '@/db/repository/snippet.repository'
+import { useRouter } from 'expo-router'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 
 export default function SnippetList({snippetList} : {snippetList : Snippet[] | null}) {
+
+    const router = useRouter()
+    function handleNavigationPress(id : number){
+        router.navigate({
+            pathname : `/Snippets/[SnippetId]`,
+            params : {
+                SnippetId : String(id)
+            }
+        })
+    }
   return (
     <FlatList 
         data={snippetList}
         // @ts-ignore
         keyExtractor={(item) =>item?.id}
         renderItem={({item})=>(
-            <Pressable style={styles.snippetContainer}>
-                <Text style={{color : '#ffffff'}}>{item.id}</Text>
+            <Pressable 
+                style={styles.snippetContainer}
+                onPress={()=>handleNavigationPress(item?.id)}
+            >
+                <MaterialCommunityIcons name="file" color="#E6E6E6" size={24} />
                 <Text style={{color : '#E6E6E6'}}>{item.title}</Text>
             </Pressable>
         )}

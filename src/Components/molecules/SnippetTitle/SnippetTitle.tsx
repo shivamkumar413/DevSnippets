@@ -1,6 +1,6 @@
 import { StyleSheet, TextInput, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { updateSnippet } from '@/db/repository/snippet.repository';
+import { getSnippetById, updateSnippet } from '@/db/repository/snippet.repository';
 
 type Prop = {
     id : string | string[]
@@ -8,8 +8,7 @@ type Prop = {
 
 export default function SnippetTitle({id} : Prop) {
 
-  const [title,setTitle] = useState<string>('');
-
+  const [title,setTitle] = useState<string | undefined>('');
   useEffect(()=>{
     const snippetId = Array.isArray(id) ? id[0] : id;
     const numberId = Number(snippetId);
@@ -17,13 +16,25 @@ export default function SnippetTitle({id} : Prop) {
     if(!snippetId || Number.isNaN(numberId)){
         return;
     }
-
+    
     const timerId = setTimeout(async ()=>{
         await updateSnippet({id : numberId,title : title});
-    },2000)
+    },1000)
 
     return () => clearTimeout(timerId);
   },[id,title])
+
+  useEffect(()=>{
+    async function fetchSnippetById(){
+        const numberId = Number(id)
+        const data  = await getSnippetById(numberId);
+        console.log(data)
+        // @ts-ignore
+        setTitle(data.title)
+    }
+    fetchSnippetById();
+    
+  },[])
 
   return (
     <View>
@@ -39,9 +50,10 @@ export default function SnippetTitle({id} : Prop) {
 
 const styles = StyleSheet.create({
     titleInput : {
-        flex : 1,
-        paddingVertical : 15,
-        fontSize : 28,
-        backgroundColor : 'red'
+        color: '#FFFFFF',
+        fontSize: 28,
+        fontWeight: '500',
+        paddingVertical: 8,
+        marginHorizontal: 5,
     }
 })

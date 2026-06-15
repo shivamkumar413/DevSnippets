@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import HomeHeader from '@/Components/molecules/HomeHeader/HomeHeader'
 import { getAllSnippets, Snippet } from '@/db/repository/snippet.repository'
 import SearchBar from '@/Components/organisms/SearchBar/SearchBar';
+import SnippetList from '@/Components/molecules/SnippetList/SnippetList';
 
 export default function index() {
 
@@ -14,7 +15,6 @@ export default function index() {
         const snippets = await getAllSnippets();;
         setSnippets(snippets)
     }
-    
     getSninppet();
   },[snippets])
 
@@ -23,13 +23,8 @@ export default function index() {
     <View style={styles.container}>
       <HomeHeader />
       <SearchBar />
-      <FlatList 
-        data={snippets}
-        renderItem={({item})=>(
-          <View>
-            <Text>{item.id}</Text>
-          </View>
-        )}
+      <SnippetList 
+        snippetList={snippets}
       />
     </View>
   )
@@ -38,6 +33,6 @@ export default function index() {
 const styles = StyleSheet.create({
   container : {
     flex : 1,
-    backgroundColor : 'gray'
+    backgroundColor : '#191919'
   }
 })

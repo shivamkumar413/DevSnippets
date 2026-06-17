@@ -1,9 +1,16 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
+import React, { useState } from 'react'
+import LanguagePicker from '@/Components/molecules/LanguagePicker/LanguagePicker'
 
 export default function CodeSnippet() {
+  const [language, setLanguage] = useState('javascript')
+
   return (
     <View style={styles.container}>
+      <LanguagePicker 
+        value={language} 
+        onChange={setLanguage} 
+      />
       <TextInput 
         multiline
         style={styles.codeInput}

@@ -3,6 +3,7 @@ import React from 'react'
 import { Snippet } from '@/db/repository/snippet.repository'
 import { useRouter } from 'expo-router'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import Feather from '@expo/vector-icons/Feather'
 
 export default function SnippetList({snippetList} : {snippetList : Snippet[] | null}) {
 
@@ -25,8 +26,8 @@ export default function SnippetList({snippetList} : {snippetList : Snippet[] | n
                 style={styles.snippetContainer}
                 onPress={()=>handleNavigationPress(item?.id)}
             >
-                <MaterialCommunityIcons name="file" color="#E6E6E6" size={24} />
-                <Text style={{color : '#E6E6E6'}}>{item.title}</Text>
+                <Feather name="file-text" color="#E6E6E6" size={23} />
+                <Text style={styles.titleText}>{item.title}</Text>
             </Pressable>
         )}
     />
@@ -53,6 +54,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 3,
+        alignItems : 'center'
         
+    },
+    titleText : {
+        color : '#E6E6E6',
+        marginHorizontal : 10,
+        fontSize : 16,
+        fontWeight : '600',
     }
 })

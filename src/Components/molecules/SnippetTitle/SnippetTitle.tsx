@@ -43,6 +43,7 @@ export default function SnippetTitle({id} : Prop) {
         value={title}
         onChangeText={setTitle}
         placeholder='Title'
+        placeholderTextColor={'#D4D4D4'}
       />
     </View>
   )

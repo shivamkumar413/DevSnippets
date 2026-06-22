@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Picker } from '@react-native-picker/picker'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import AntDesign from '@expo/vector-icons/AntDesign'

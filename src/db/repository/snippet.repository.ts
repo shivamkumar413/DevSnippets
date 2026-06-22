@@ -96,6 +96,25 @@ export async function deleteSnippet(id : number){
     
 }
 
+export async function getFiveLatestSnippets (): Promise<Snippet[]>{
+    const result = await db.getAllAsync(`
+        SELECT * FROM snippets
+        ORDER BY created_at ASC
+        LIMIT 5
+    `);
+
+    return result.map((row : any) => ({
+        id: row.id,
+        title: row.title,
+        code: row.code,
+        description: row.description,
+        tags: JSON.parse(row.tags),
+        favorite: row.favorite,
+        created_at: row.created_at,
+        updated_at: row.updated_at
+    }));
+}
+
 export async function getAllSnippets() : Promise<Snippet[]>{
     const result = await db.getAllAsync(`
         SELECT * FROM snippets

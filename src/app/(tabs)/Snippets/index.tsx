@@ -1,18 +1,18 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Modal, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import HomeHeader from '@/Components/molecules/HomeHeader/HomeHeader'
-import { getAllSnippets, Snippet } from '@/db/repository/snippet.repository'
+import { getAllSnippets, getFiveLatestSnippets, Snippet } from '@/db/repository/snippet.repository'
 import SearchBar from '@/Components/organisms/SearchBar/SearchBar';
 import SnippetList from '@/Components/molecules/SnippetList/SnippetList';
+import { useOptionsModal } from '@/Store/useOptionsModal';
 
 export default function index() {
 
   const [snippets,setSnippets] = useState<Snippet[] | null>(null);
 
-
   useEffect(()=>{
     async function getSninppet(){
-        const snippets = await getAllSnippets();;
+        const snippets = await getFiveLatestSnippets();
         setSnippets(snippets)
     }
     getSninppet();
@@ -23,6 +23,7 @@ export default function index() {
     <View style={styles.container}>
       <HomeHeader />
       <SearchBar />
+
       <SnippetList 
         snippetList={snippets}
       />

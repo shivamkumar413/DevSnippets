@@ -26,6 +26,7 @@ export default function SnippetPage() {
       <CodeDescription 
         id={SnippetId}
       />
+
     </ScrollView>
   )
 }

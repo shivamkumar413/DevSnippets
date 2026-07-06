@@ -1,16 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import AntDesign from '@expo/vector-icons/AntDesign'
+import { deleteSnippet, updateSnippet } from '@/db/repository/snippet.repository'
 
-export default function ModalOptionsContent() {
+type Prop = {
+    id : number,
+    setIsOptionsModal : (isOptionsModal : boolean)=>void
+}
+
+export default function ModalOptionsContent({id,setIsOptionsModal} : Prop) {
+
+    async function handleDeletePress(){
+        const response = await deleteSnippet(id);
+        setIsOptionsModal(false)
+    }
+
+    async function handleAddToFavouritesPress(){
+        // Logic to add the snippet to favourites
+        const response = await updateSnippet({id : id,favorite : 1});
+        setIsOptionsModal(false)
+    }
+
   return (
     <View style={styles.container}>
-        <View style={styles.contentContainer}>
+        <Pressable 
+            style={styles.contentContainer}
+            onPress={handleAddToFavouritesPress}
+        >
             <MaterialCommunityIcons name="star-outline" color="#E6E6E6" size={24} />
             <Text style={styles.contentText}>Add to Favourites</Text>
-        </View>
+        </Pressable>
         <View style={styles.contentContainer}>
             <Ionicons name="duplicate-outline" color="#E6E6E6" size={24} />
             <Text style={styles.contentText}>Duplicate</Text>
@@ -19,10 +39,20 @@ export default function ModalOptionsContent() {
             <MaterialCommunityIcons name="arrow-right-top" color="#E6E6E6" size={22} />
             <Text style={styles.contentText}>Move to</Text>
         </View>
-        <View style={styles.contentContainer}>
+        <Pressable 
+            style={styles.contentContainer}
+            onPress={handleDeletePress}
+        >
             <Ionicons name="trash-outline" color="red" size={24} />
-            <Text style={styles.contentText}>Delete</Text>
-        </View>
+            <Text 
+                style={StyleSheet.compose(
+                    styles.contentText,
+                    {color : 'red'}
+                )}
+            >
+                Delete
+            </Text>
+        </Pressable>
     </View>
   )
 }

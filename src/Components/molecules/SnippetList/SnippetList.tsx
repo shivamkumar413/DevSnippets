@@ -11,14 +11,14 @@ import ModalOptionsContent from '../ModalOptionsContent/ModalOptionsContent'
 
 type ModalSnippetDetail = {
     title : string | null,
-    snippetId : number | null
+    snippetId : number
 }
 
 export default function SnippetList({snippetList} : {snippetList : Snippet[] | null}) {
     const { isOptionsModal,setIsOptionsModal } = useOptionsModal()
     const [snippetModalDetail,SetSnippetModalDetail] = useState<ModalSnippetDetail>({
         title : '',
-        snippetId : null
+        snippetId : -1
     })
     const router = useRouter()
     function handleNavigationPress(id : number){
@@ -37,6 +37,7 @@ export default function SnippetList({snippetList} : {snippetList : Snippet[] | n
             snippetId : id,
         })
     }
+
   return (
     <>
         <FlatList 
@@ -68,6 +69,7 @@ export default function SnippetList({snippetList} : {snippetList : Snippet[] | n
             )}
         />
 
+
     <Modal
         visible={isOptionsModal}
         transparent={true}
@@ -89,7 +91,10 @@ export default function SnippetList({snippetList} : {snippetList : Snippet[] | n
                 <ModalOptionsHeader
                     snippetModalTitle={snippetModalDetail.title}
                 />
-                <ModalOptionsContent />
+                <ModalOptionsContent 
+                    id={snippetModalDetail.snippetId}
+                    setIsOptionsModal = {setIsOptionsModal}
+                />
             </View>
         </View>
     </Modal>
@@ -146,5 +151,5 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         padding: 0,
-    }
+    },
 })

@@ -13,7 +13,6 @@ export default function HomeHeader() {
             paddingTop : insets.top
         }
     )}>
-      <Text>HomeHeader</Text>
     </View>
   )
 }

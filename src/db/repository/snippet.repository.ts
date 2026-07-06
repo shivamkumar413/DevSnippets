@@ -100,7 +100,7 @@ export async function getFiveLatestSnippets (): Promise<Snippet[]>{
     const result = await db.getAllAsync(`
         SELECT * FROM snippets
         ORDER BY created_at ASC
-        LIMIT 5
+        LIMIT 10
     `);
 
     return result.map((row : any) => ({
@@ -118,7 +118,7 @@ export async function getFiveLatestSnippets (): Promise<Snippet[]>{
 export async function getAllSnippets() : Promise<Snippet[]>{
     const result = await db.getAllAsync(`
         SELECT * FROM snippets
-        ORDER BY created_at DESC
+        ORDER BY created_at ASC
     `);
 
     return result.map((row : any) => ({

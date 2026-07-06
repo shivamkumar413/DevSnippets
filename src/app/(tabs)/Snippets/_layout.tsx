@@ -9,6 +9,19 @@ export default function SnippetStackLayout(){
                     headerShown : false
                 }}
             />
+
+            <Stack.Screen 
+                name="AllSnippets" 
+                options={{
+                    title : 'All Pages',
+                    headerStyle : {
+                        backgroundColor : '#191919'
+                    },
+                    headerTintColor : '#ffffff',
+                    headerTitleAlign : 'center',
+                }}
+            />
+            
             <Stack.Screen 
                 name="[SnippetId]" 
                 options={{

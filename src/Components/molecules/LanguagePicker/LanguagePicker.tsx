@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     flex : 1,
     flexDirection : 'row',
     alignItems : 'center',
+    justifyContent : 'space-between',
   },
   label: {
     color: '#8F8F8F',
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     gap : 15,
     backgroundColor: '#252525',
     borderColor: '#3A3A3A',
-    borderRadius: 8,
+    borderRadius: 20,
     borderWidth: 1,
   },
   dropDown : {

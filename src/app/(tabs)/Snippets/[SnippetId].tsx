@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import CodeSnippet from '@/Components/organisms/CodeSnippet/CodeSnippet';
 import SnippetTitle from '@/Components/molecules/SnippetTitle/SnippetTitle';
@@ -7,6 +7,11 @@ import CodeDescription from '@/Components/molecules/CodeDescription/CodeDescript
 import { useLocalSearchParams } from 'expo-router';
 
 export default function SnippetPage() {
+
+  useEffect(()=>{
+    
+  },[])
+
     const insets = useSafeAreaInsets();
     const { SnippetId } = useLocalSearchParams()
   return (

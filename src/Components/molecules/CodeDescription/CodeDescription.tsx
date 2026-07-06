@@ -57,7 +57,8 @@ export default function CodeDescription({id} : Prop) {
 
 const styles = StyleSheet.create({
     container : {
-
+        flex : 1,
+        marginHorizontal : 15,
     },
     descriptionInput : {
         color: '#FFFFFF',
